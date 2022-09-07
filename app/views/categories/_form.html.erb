@@ -11,22 +11,15 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="field">
+    <%= form.text_field :name, autofocus: true, placeholder: 'Name', required: true%>
   </div>
 
-  <div>
-    <%= form.label :icon, style: "display: block" %>
-    <%= form.text_area :icon %>
+  <div class="field">
+    <%= form.file_field :icon, autofocus: true, placeholder: 'Icon', required: true %>
   </div>
 
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="button-link">
+    <%= form.submit "Valider", class: 'but-default' %>
   </div>
 <% end %>
