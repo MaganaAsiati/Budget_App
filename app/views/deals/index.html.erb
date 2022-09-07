@@ -1,14 +1,28 @@
-<p style="color: green"><%= notice %></p>
+<div class="category-ctn">
+  <div class="category-nav">
+    <%= link_to categories_path do %>
+      <h2><</h2>
+    <% end %>
+    <div class="nav-title-ctn">
+      <h3 class="nav-title">Deals</h3>
+    </div>
+    <div class="nav-title-ctn">
+      <%= link_to "Log out", destroy_user_session_path, 'data-turbo-method': :delete, class: 'but-default log-out' %>
+    </div>
+  </div>
+  <div class="price-band">
+    <h5>Total amount : </h5>
+    <h5>$ <%= @deals.map { |deal| deal.amount }.sum %></h5>
+  </div>
 
-<h1>Deals</h1>
+  <div id="deals">
+    <% @deals.each do |deal| %>
+      <%= render deal %>
+      <%#= button_to "Remove", category_deal_path(@category, deal), method: :delete %>
+    <% end %>
+  </div>
 
-<div id="deals">
-  <% @deals.each do |deal| %>
-    <%= render deal %>
-    <p>
-      <%= link_to "Show this deal", deal %>
-    </p>
-  <% end %>
+  <div class="bottom-button">
+    <%= link_to "New deal", new_category_deal_path, class: 'but-default bottom-btn' %>
+  </div>
 </div>
-
-<%= link_to "New deal", new_deal_path %>
