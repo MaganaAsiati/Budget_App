@@ -1,14 +1,31 @@
-<p style="color: green"><%= notice %></p>
+<div class="category-ctn">
+  <div class="category-nav">
+    <div class="nav-title-ctn">
+      <h3 class="nav-title">Categories</h3>
+    </div>
+    <div class="nav-title-ctn">
+      <%= link_to "Log out", destroy_user_session_path, 'data-turbo-method': :delete, class: 'but-default log-out' %>
+    </div>
+  </div>
+  <div>
 
-<h1>Categories</h1>
+  </div>
+  <div id="categories" class="category-list-ctn">
+    <% if @categories.count != 0 %>
+    <% @categories.each do |category| %>
+      <%= link_to category_deals_path(category.id) do %>
+      <div class="category-item">
+        <%= render category %>
+        <div class="category-item-right">
+          <%= button_to 'Details', category_path(category), method: :delete, class: "btn-rmv"%>
+        </div>
+      </div>
+      <% end %>
+    <% end %>
+      <%end %>
+  </div>
 
-<div id="categories">
-  <% @categories.each do |category| %>
-    <%= render category %>
-    <p>
-      <%= link_to "Show this category", category %>
-    </p>
-  <% end %>
+  <div class="bottom-button">
+    <%= link_to "New category", new_category_path, class: 'but-default bottom-btn'%>
+  </div>
 </div>
-
-<%= link_to "New category", new_category_path %>
