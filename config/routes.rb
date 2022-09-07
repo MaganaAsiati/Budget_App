@@ -1,16 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :deals
-  resources :categories
-  resources :users
+  # resources :categories
+  # resources :deals
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  resources :users do
-    resources :categories, only: [:index, :show, :new, :create] do
-      resources :deals, only: [:index, :show, :new, :create]
-    end
+  root "categories#index"
+  resources :users
+  resources :categories, only: [:index, :show, :new, :create, :destroy] do
+    resources :deals, only: [:index, :show, :new, :create, :destroy]
   end
 
-  # Defines 
-  # Defines the root path route ("/")
-  root "users#splash_screen"
 end

@@ -1,13 +1,19 @@
+require 'base64'
+
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[show edit update destroy]
 
   # GET /categories or /categories.json
   def index
-    @categories = Category.all
+    redirect_to new_user_session_path if user_signed_in? == false
+    @categories = Category.where(author_id: current_user.id)
   end
 
   # GET /categories/1 or /categories/1.json
-  def show; end
+  def show
+    @category = Category.find(params[:id])
+    @deals = Deal.where(category_id: params[:id])
+  end
 
   # GET /categories/new
   def new
@@ -19,11 +25,15 @@ class CategoriesController < ApplicationController
 
   # POST /categories or /categories.json
   def create
-    @category = Category.new(category_params)
+    file_content = File.read(category_params['icon'].tempfile, &:read)
+    encoded_string = Base64.strict_encode64(file_content)
+    @category = Category.create(user: current_user, name: category_params['name'], icon: encoded_string)
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to category_url(@category), notice: 'Category was successfully created.' }
+        format.html do
+          redirect_to categories_path, notice: 'Category was successfully created.'
+        end
         format.json { render :show, status: :created, location: @category }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -64,6 +74,6 @@ class CategoriesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def category_params
-    params.require(:category).permit(:name, :icon, :user_id)
+    params.require(:category).permit(:name, :icon)
   end
 end
