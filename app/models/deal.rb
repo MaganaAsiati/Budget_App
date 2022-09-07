@@ -4,5 +4,4 @@ class Deal < ApplicationRecord
 
   validates :name, length: { minimum: 1 }
   validates :amount, numericality: { only_integer: true, greater_than: 0 }
-
 end
