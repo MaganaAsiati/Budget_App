@@ -14,8 +14,7 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def splash_screen
-  end
+  def splash_screen; end
 
   # GET /users/1/edit
   def edit; end
