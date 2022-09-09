@@ -1,0 +1,24 @@
+<p style="color: green"><%= notice %></p>
+
+<div>
+  <div>
+    <h5>Total amount : </h5>
+    <h5><%= @deals.inject(0, :+) %></h5>
+  </div>
+  <% @deals.each do |deal| %>
+    <p><%= deal.name %></p>
+    <p><%= deal.amount %></p>
+    <p><%= deal.id %></p>
+  <% end %>
+</div>
+
+<div>
+
+  <div>
+    <%= link_to "Add new transaction", new_category_deal_path(@category) %>
+  </div>
+  <%= link_to "Back to categories", :back %>
+
+  <%#= button_to "Destroy this category", @category, method: :delete %>
+</div>
+

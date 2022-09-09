@@ -1,0 +1,10 @@
+<div id="<%= dom_id category %>" class="category-item-left">
+  <div class="cat-img-ctn">
+      <%= image_tag "data:image/png;base64,#{category.icon}", :class => "category-img" %>
+  </div>
+  <div class="category-det">
+    <h5 class="cat-det"><%= category.name %></h5>
+    <h5 class="cat-det date">$ <%= category.deals.map{|deal| deal.amount }.sum %></h5>
+  </div>
+
+</div>

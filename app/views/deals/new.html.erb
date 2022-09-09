@@ -1,0 +1,39 @@
+<div class="cate-create-ctn">
+  <div class="category-nav">
+    <%= link_to category_deals_path do %>
+      <h2></h2>
+    <% end %>
+    <div class="nav-title-ctn">
+      <h3 class="nav-title">New Deal</h3>
+    </div>
+    <div class="nav-title-ctn">
+      <%= link_to "Log out", destroy_user_session_path, 'data-turbo-method': :delete, class: 'but-default log-out' %>
+    </div>
+  </div>
+
+  <%= form_with model: @deal, url: category_deals_path, method: :post, class: 'form' do |form| %>
+    <% if @deal.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@deal.errors.count, "error") %> prohibited this deal from being saved:</h2>
+
+        <ul>
+          <% @deal.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.text_field :name, autofocus: true, placeholder: "Name", required: true %>
+    </div>
+
+    <div class="field">
+      <%= form.number_field :amount, autofocus: true, placeholder: "Amount", required: true %>
+    </div>
+
+    <div class="button-link">
+      <%= form.submit "Valider", class: 'but-default' %>
+    </div>
+  <% end %>
+</div>

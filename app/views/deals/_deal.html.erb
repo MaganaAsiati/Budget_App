@@ -1,0 +1,10 @@
+<div id="<%= dom_id deal %>" class="category-item">
+  <div class="category-det">
+    <h4 class="cat-det">Deal N* <%= deal.id.to_s.rjust(5, "0") %></h4>
+    <h4 class="cat-det"> Name : <%= deal.name %></h4>
+  </div>
+  <div class="category-item-right">
+    <h4 class="cat-det">$ <%= deal.amount %></h4>
+  </div>
+</div>
+
