@@ -62,7 +62,7 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
+ 
   def category_params
     params.require(:category).permit(:name, :icon, :user_id)
   end
